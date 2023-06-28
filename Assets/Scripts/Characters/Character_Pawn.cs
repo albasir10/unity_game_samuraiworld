@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class Character_Pawn : NetworkBehaviour
@@ -44,6 +45,7 @@ public class Character_Pawn : NetworkBehaviour
     public List<Skill> skills;
 
     public TextMeshProUGUI textmesh_name;
+    public GameObject icon_obj;
     // Конструктор класса
     public virtual void Move(Vector3 direction)
     {

@@ -10,8 +10,6 @@ public class CameraController : NetworkBehaviour
     public float moveSpeed = 10f;
     public float boundary = 25f;
     public static CameraController singleon;
-    public GameObject panel_object;
-    public Button button_character_name;
     void Update()
     {
         if (!isLocalPlayer)
@@ -29,7 +27,7 @@ public class CameraController : NetworkBehaviour
         // Выделение объектов при нажатии левой кнопки мыши
         if (Input.GetMouseButtonDown(0))
         {
-            CmdSelectObject();
+            ClientSelectObject();
         }
     }
     [Client]
@@ -85,7 +83,28 @@ public class CameraController : NetworkBehaviour
         // Обновляем состояние объекта на сервере
         // ...
     }
-
+    public void ClientSelectObject()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        if (hit.collider != null && hit.collider.GetComponent<Character_Pawn>())
+        {
+            Character_Pawn character = hit.collider.GetComponent<Character_Pawn>();
+            // Обработка нажатия на объект
+            UIPlayer.singleon.OpenPanelInfoCharacter(character);
+        }
+        else if (hit.collider != null && hit.collider.GetComponentInParent<Character_Pawn>())
+        {
+            Character_Pawn character = hit.collider.GetComponentInParent<Character_Pawn>();
+            // Обработка нажатия на объект
+            UIPlayer.singleon.OpenPanelInfoCharacter(character);
+        }
+        else if (hit.collider != null && UIPlayer.singleon.is_opened_info_character_panel)
+        {
+            UIPlayer.singleon.ClosePanelInfoCharacter();
+        }
+        CmdSelectObject();
+    }
     [Command]
     private void CmdSelectObject()
     {
@@ -118,8 +137,9 @@ public class CameraController : NetworkBehaviour
     [Client]
     public void StartOptions()
     {
-        // устанавливаем панель менюшки при клике на объекты
-        GetComponentInChildren<UIPlayer>().SetCanvasUI(GetComponentInChildren<Canvas>().gameObject);
+        UIPlayer.singleon = GetComponentInChildren<UIPlayer>();
+        UIPanelInfoCharacter.singleon = GetComponentInChildren<UIPanelInfoCharacter>();
+        UIPanelInfoCharacter.singleon.gameObject.SetActive(false);
         // настраиваем пешки
         Character_Pawn[] NPCs =  FindObjectsOfType<Character_Pawn>();
         foreach (Character_Pawn npc in NPCs) 
