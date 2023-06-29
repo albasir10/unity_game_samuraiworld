@@ -2,6 +2,7 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class CameraController : NetworkBehaviour
@@ -10,6 +11,7 @@ public class CameraController : NetworkBehaviour
     public float moveSpeed = 10f;
     public float boundary = 25f;
     public static CameraController singleon;
+    public GameObject select_character;
     void Update()
     {
         if (!isLocalPlayer)
@@ -87,33 +89,48 @@ public class CameraController : NetworkBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        Debug.Log(hit.collider);
+        if (hit.collider != null && hit.collider.GetComponent<Character_Pawn>() && hit.collider.GetComponent<Character_Pawn>().gameObject == select_character)
+            return;
         if (hit.collider != null && hit.collider.GetComponent<Character_Pawn>())
         {
             Character_Pawn character = hit.collider.GetComponent<Character_Pawn>();
             // Обработка нажатия на объект
             UIPlayer.singleon.OpenPanelInfoCharacter(character);
+            select_character = character.gameObject;
+            CmdSelectObject(select_character);
         }
         else if (hit.collider != null && hit.collider.GetComponentInParent<Character_Pawn>())
         {
             Character_Pawn character = hit.collider.GetComponentInParent<Character_Pawn>();
             // Обработка нажатия на объект
             UIPlayer.singleon.OpenPanelInfoCharacter(character);
+            select_character = character.gameObject;
+            CmdSelectObject(select_character);
         }
         else if (hit.collider != null && UIPlayer.singleon.is_opened_info_character_panel)
         {
             UIPlayer.singleon.ClosePanelInfoCharacter();
+            CmdUnSelectObject(select_character);
+            select_character = null;
         }
-        CmdSelectObject();
     }
     [Command]
-    private void CmdSelectObject()
+    private void CmdSelectObject(GameObject character_obj)
     {
         // Логика выделения объекта
 
         // Обновляем состояние объекта на сервере
         // ...
     }
+    [Command]
+    private void CmdUnSelectObject(GameObject character_obj)
+    {
+        // Логика выделения объекта
 
+        // Обновляем состояние объекта на сервере
+        // ...
+    }
     // Переопределяем метод OnStartLocalPlayer
     public override void OnStartLocalPlayer()
     {

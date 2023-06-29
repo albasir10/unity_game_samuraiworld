@@ -20,20 +20,4 @@ public class Task
         return priority;
     }
 
-    public bool IsCompleted()
-    {
-        return isCompleted;
-    }
-
-    public void SetCompleted(bool completed)
-    {
-        isCompleted = completed;
-    }
-    // Метод для выполнения задачи
-    public void CompleteTask()
-    {
-        // Логика выполнения задачи
-        isCompleted = true;
-        // Дополнительные действия после выполнения задачи
-    }
 }
