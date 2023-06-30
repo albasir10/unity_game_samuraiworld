@@ -1,23 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Task
 {
-    public string name; // Название задачи
-    public int priority; // Приоритет задачи
-    public bool isCompleted; // Флаг завершения задачи
+    public string Name { get; }
+    public TaskPriority Priority { get; }
+    public bool IsCompleted { get; private set; }
 
-    // Конструктор класса
-    public Task(string name, int priority)
+    public Task(string name, TaskPriority priority)
     {
-        this.name = name;
-        this.priority = priority;
-        this.isCompleted = false;
-    }
-    public int GetPriority()
-    {
-        return priority;
+        Name = name;
+        Priority = priority;
+        IsCompleted = false;
     }
 
+    public void PerformTask()
+    {
+        // Логика выполнения задачи
+
+        IsCompleted = true;
+    }
 }

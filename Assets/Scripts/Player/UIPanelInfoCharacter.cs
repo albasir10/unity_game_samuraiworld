@@ -13,15 +13,15 @@ public class UIPanelInfoCharacter : MonoBehaviour
     public GameObject icon_character;
     public TextMeshProUGUI text_mesh_name_character;
     public GameObject icon_now_in_menu;
-    public void SetParametersCharacterInMenu(Character_Pawn character)
+    public void SetParametersCharacterInMenu(Character character)
     {
         //icon_character.overrideSprite = character.icon.sprite;
         if (icon_now_in_menu != null)
             Destroy(icon_now_in_menu);
         CreateIcon(character);
-        text_mesh_name_character.text = character.second_name + " " + character.first_name;
+        text_mesh_name_character.text = character..second_name + " " + character.first_name;
     }
-    public void CreateIcon(Character_Pawn character)
+    public void CreateIcon(Character character)
     {
         icon_now_in_menu = Instantiate(character.icon_obj, icon_character.transform);
         icon_now_in_menu.GetComponent<BoxCollider2D>().enabled = false;
