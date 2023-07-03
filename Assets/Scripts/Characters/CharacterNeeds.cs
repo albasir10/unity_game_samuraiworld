@@ -8,7 +8,8 @@ public class CharacterNeeds
     public float sleepDecreaseRate; // Скорость уменьшения сна
     public float hungerThreshold; // порог еды
     public float sleepThreshold; // порог сна
-    public CharacterNeeds(float initialHunger, float initialSleep, float hungerRate, float sleepRate, float hungerThreshold, float sleepThreshold)
+    public Character character;
+    public CharacterNeeds(Character character, float initialHunger, float initialSleep, float hungerRate, float sleepRate, float hungerThreshold, float sleepThreshold)
     {
         hunger = initialHunger;
         sleep = initialSleep;
@@ -16,13 +17,17 @@ public class CharacterNeeds
         sleepDecreaseRate = sleepRate;
         this.hungerThreshold = hungerThreshold;
         this.sleepThreshold = sleepThreshold;
+        this.character = character;
     }
 
     public void UpdateNeeds()
     {
         // Обновление значений потребностей в соответствии с логикой игры
-        DecreaseHunger();
-        DecreaseSleep();
+        if (!character.attributes.isSleeping)
+            DecreaseSleep();
+        if (!character.attributes.isEatting)
+            DecreaseHunger();
+            
 
         // Проверка других потребностей и выполнение соответствующих действий
         // ...
@@ -50,18 +55,16 @@ public class CharacterNeeds
     {
         return sleep < sleepThreshold;
     }
-
-    public void Eat()
+    public void IncreaseSleep()
     {
-        // Логика поедания еды
-        // ...
+        sleep += sleepDecreaseRate * Time.deltaTime;
+        if (sleep > 100)
+            sleep = 100;
     }
-
-    public void Rest()
+    public void IncreaseHunger()
     {
-        // Логика отдыха
-        // ...
+        hunger += hungerDecreaseRate * Time.deltaTime;
+        if (hunger >= 100)
+            hunger = 100;
     }
-    // Дополнительные методы и функциональность
-    // ...
 }

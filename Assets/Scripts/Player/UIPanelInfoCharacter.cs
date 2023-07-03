@@ -13,17 +13,21 @@ public class UIPanelInfoCharacter : MonoBehaviour
     public GameObject icon_character;
     public TextMeshProUGUI text_mesh_name_character;
     public GameObject icon_now_in_menu;
+    public Character current_character;
     public void SetParametersCharacterInMenu(Character character)
     {
         //icon_character.overrideSprite = character.icon.sprite;
-        if (icon_now_in_menu != null)
+        if (icon_now_in_menu != null && current_character == character)
+            return;
+        else if (icon_now_in_menu != null)
             Destroy(icon_now_in_menu);
+        current_character = character;
         CreateIcon(character);
-        text_mesh_name_character.text = character..second_name + " " + character.first_name;
+        text_mesh_name_character.text = character.attributes.secondName + " " + character.attributes.firstName;
     }
     public void CreateIcon(Character character)
     {
-        icon_now_in_menu = Instantiate(character.icon_obj, icon_character.transform);
+        icon_now_in_menu = Instantiate(character.objIconCharacter, icon_character.transform);
         icon_now_in_menu.GetComponent<BoxCollider2D>().enabled = false;
         icon_now_in_menu.AddComponent<RectTransform>();
         icon_now_in_menu.AddComponent<CanvasRenderer>();

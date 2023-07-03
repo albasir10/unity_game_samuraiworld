@@ -16,26 +16,4 @@ public class CharacterIdleState : CharacterState
         // Ќапример, возобновление движени€ персонажа
     }
 
-    public override void UpdateState()
-    {
-        // Ћогика обновлени€ состо€ни€ "покой"
-        // Ќапример, проверка условий перехода в другие состо€ни€
-        if (stateManager.character.needs.IsHungry())
-        {
-            stateManager.ChangeState(new CharacterEatingState(stateManager));
-        }
-        else if (stateManager.character.needs.IsTired())
-        {
-            stateManager.ChangeState(new CharacterRestingState(stateManager));
-        }
-        else if (stateManager.character.state.IsAttacked)
-        {
-            stateManager.ChangeState(new CharacterAttackedState(stateManager));
-        }
-        else
-        {
-            // Ћогика выполнени€ действий в состо€нии "покой"
-            // Ќапример, ожидание или взаимодействие с окружением
-        }
-    }
 }

@@ -1,7 +1,7 @@
 public class CharacterStateManager
 {
     public Character character;
-    private CharacterState currentState;
+    public CharacterState currentState;
 
     public CharacterStateManager(Character character)
     {
@@ -18,6 +18,7 @@ public class CharacterStateManager
     {
         currentState.ExitState();
         currentState = newState;
+        character.state = newState;
         currentState.EnterState();
     }
 }

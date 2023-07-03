@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class CharacterAttributes
 {
@@ -11,12 +13,32 @@ public class CharacterAttributes
     public int intelligence;
     public int leadership;
     public int sensitivity;
-    public int speed;
+    public float speed;
     public List<Skill> skills;
-
+    public bool isAttacked = false;
+    public bool isEatting = false;
+    public bool isSleeping = false;
+    public bool isMoving = false;
+    public bool isInBed = false;
+    public bool isInHome = false;
     public CharacterAttributes()
     {
         skills = new List<Skill>();
+        if (firstName == null)
+        {
+            speed = 10f;
+            CharacterNameLoader loader = new CharacterNameLoader();
+            List<string> names = loader.LoadCharacterNames("Data/Character_first_names.txt");
+            System.Random random = new System.Random();
+            int randomIndex = random.Next(names.Count);
+            string randomName = names[randomIndex];
+            firstName = randomName;
+
+            names = loader.LoadCharacterNames("Data/Character_second_names.txt");
+            randomIndex = random.Next(names.Count);
+            randomName = names[randomIndex];
+            secondName = randomName;
+        }
     }
 
     // Дополнительные методы и функциональность

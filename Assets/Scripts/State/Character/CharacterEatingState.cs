@@ -8,7 +8,14 @@ public class CharacterEatingState : CharacterState
     {
         // Логика входа в состояние "поедание"
         // Например, начало анимации поедания еды
-        stateManager.character.CmdEat();
+        if (IsCanEat())
+        {
+
+        }
+        else
+        {
+            
+        }
     }
 
     public override void ExitState()
@@ -16,23 +23,9 @@ public class CharacterEatingState : CharacterState
         // Логика выхода из состояния "поедание"
         // Например, завершение анимации поедания еды
     }
-
-    public override void UpdateState()
+    public bool IsCanEat()
     {
-        // Логика обновления состояния "поедание"
-        // Например, проверка условий завершения поедания еды
-        if (!stateManager.character.needs.IsHungry())
-        {
-            stateManager.ChangeState(new CharacterIdleState(stateManager));
-        }
-        else if (stateManager.character.state.IsAttacked)
-        {
-            stateManager.ChangeState(new CharacterAttackedState(stateManager));
-        }
-        else
-        {
-            // Логика выполнения действий в состоянии "поедание"
-            // Например, ожидание или взаимодействие с едой
-        }
+
+        return false;
     }
 }

@@ -23,6 +23,15 @@ public class CharacterInventory
     {
         return items.Contains(item);
     }
+    public bool HasTypeItem(ItemType type)
+    {
+        foreach (Item item in items) 
+        {
+            if (item.itemType == type)
+                return true;
+        }
+        return false;
+    }
     // Обновление инвентаря персонажа
     public void UpdateInventory()
     {

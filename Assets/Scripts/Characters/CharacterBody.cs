@@ -1,18 +1,18 @@
 public class CharacterBody
 {
-    public BodyPart hands;
-    public BodyPart legs;
-    public BodyPart head;
-    public BodyPart neck;
-    public BodyPart torso;
+    public CharacterBodyPart hands;
+    public CharacterBodyPart legs;
+    public CharacterBodyPart head;
+    public CharacterBodyPart neck;
+    public CharacterBodyPart torso;
 
     public CharacterBody()
     {
-        hands = new BodyPart();
-        legs = new BodyPart();
-        head = new BodyPart();
-        neck = new BodyPart();
-        torso = new BodyPart();
+        hands = new CharacterBodyPart("hands");
+        legs = new CharacterBodyPart("legs");
+        head = new CharacterBodyPart("head");
+        neck = new CharacterBodyPart("neck");
+        torso = new CharacterBodyPart("torso");
     }
 
     // Дополнительные методы и функциональность

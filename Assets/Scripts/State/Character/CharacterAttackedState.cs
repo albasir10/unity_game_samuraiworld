@@ -7,22 +7,15 @@ public class CharacterAttackedState : CharacterState
     public override void EnterState()
     {
         // Логика входа в состояние атаки
-        stateManager.character.state.StartAttacked();
-    }
-
-    public override void UpdateState()
-    {
-        // Логика обновления состояния атаки
-        if (!stateManager.character.state.IsAttacked)
-        {
-            // Если персонаж перестал быть атакованным, изменяем состояние
-            stateManager.ChangeState(new CharacterIdleState(stateManager));
-        }
+        stateManager.character.attributes.isAttacked = true;
+        //stateManager.character.StartAttacked();
     }
 
     public override void ExitState()
     {
         // Логика выхода из состояния атаки
-        stateManager.character.state.StopAttacked();
+        stateManager.character.attributes.isAttacked = false;
+        //stateManager.character.StopAttacked();
     }
+
 }

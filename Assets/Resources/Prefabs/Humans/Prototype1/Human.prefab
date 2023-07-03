@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317986914794311566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.7, z: -0.017318936}
+  m_LocalPosition: {x: 0.3, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 6245755265856699610}
   - component: {fileID: 3861329868235285178}
   - component: {fileID: 280953641759400714}
-  - component: {fileID: 1680130270381876960}
+  - component: {fileID: 3414286045234734581}
   m_Layer: 0
   m_Name: Human
   m_TagString: Untagged
@@ -955,7 +955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8513185877451812405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -3, y: 0, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1469,7 +1469,7 @@ MonoBehaviour:
   useLocalTransformOnly: 0
   ownerChangeIndicator: 1
   receivedStatesCounter: 0
---- !u!114 &1680130270381876960
+--- !u!114 &3414286045234734581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1478,23 +1478,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8513185877451812405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24a7c3d700a91004d9c82aae81f8936c, type: 3}
+  m_Script: {fileID: 11500000, guid: ec784e4b5bca10945864ea96c09f641d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  first_name: 
-  second_name: 
-  status: 0
-  charisma: 0
-  strength: 0
-  agility: 0
-  intelligence: 0
-  leadership: 0
-  sensitivity: 0
-  textmesh_name: {fileID: 2643310740669627134}
-  icon_obj: {fileID: 8399827584631216539}
+  objIconCharacter: {fileID: 8399827584631216539}
+  textMeshProNameCharacter: {fileID: 2643310740669627134}
+  home: {fileID: 0}
 --- !u!1 &8513185877648180633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,7 +1498,7 @@ GameObject:
   - component: {fileID: 8513185877648180634}
   - component: {fileID: 8513185877648180635}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Rot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1604,7 +1596,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8731976865621712807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -0.7, z: -0.017318936}
+  m_LocalPosition: {x: -0.3, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

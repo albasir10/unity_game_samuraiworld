@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 593278638569547226}
   - component: {fileID: 3066712600925177688}
   - component: {fileID: 2660651732133403707}
+  - component: {fileID: 4633344870186427535}
   m_Layer: 0
   m_Name: Camera Player
   m_TagString: MainCamera
@@ -123,6 +124,22 @@ MonoBehaviour:
   move_in_border: 0
   moveSpeed: 10
   boundary: 25
+--- !u!114 &4633344870186427535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593278638569547227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2752ce9172e49f46bdc021c72e47075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  select_character: {fileID: 0}
 --- !u!1 &811965187994263963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,6 +1509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon_character: {fileID: 3950899266638794429}
   text_mesh_name_character: {fileID: 4614747404148958773}
+  icon_now_in_menu: {fileID: 0}
+  current_character: {fileID: 0}
 --- !u!1 &6785122308762818962
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,77 +1,94 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CharacterTasks
 {
-    public List<Task> tasks;
+    public List<Task> tasksList;
     public Task currentTask;
-
-    public CharacterTasks()
+    public Character character;
+    public CharacterTasks(Character character)
     {
-        tasks = new List<Task>();
+        tasksList = new List<Task>();
         currentTask = null;
+        this.character = character;
+        tasksList.Add(TaskList.idle);
     }
-
+    public string GetTasksNames()
+    {
+        string tasksNames = "";
+        foreach (Task task in tasksList)
+        {
+            tasksNames += task.Name + " ";
+        }
+        return tasksNames;
+    }
     public void AddTask(Task task)
     {
-        tasks.Add(task);
+        tasksList.Add(task);
         SortTasks();
     }
-
+    public void AddTask(Task task, Vector2 destination)
+    {
+        task.destination = destination;
+        tasksList.Add(task);
+        SortTasks();
+    }
     public void RemoveTask(Task task)
     {
-        tasks.Remove(task);
+        tasksList.Remove(task);
     }
 
     public void SortTasks()
     {
-        tasks.Sort((x, y) => y.Priority.CompareTo(x.Priority));
+        tasksList.Sort((x, y) => y.Priority.CompareTo(x.Priority));
+        currentTask = tasksList[0];
     }
 
     public void CreateTasks(CharacterNeeds needs)
     {
         // Логика создания задач для персонажа
 
-        // Пример: создаем задачу поедания, если персонажу голодно
-        if (needs.IsHungry())
+        if (needs.IsTired() ) // сонливый
         {
-            Task eatTask = new Task("Eat", TaskPriority.High);
-            AddTask(eatTask);
+            if (tasksList.IndexOf(TaskList.sleep) == -1)
+            {
+                AddTask(TaskList.sleep);
+            }
+        }
+        if (needs.IsHungry()) // голодный
+        {
+            if (tasksList.IndexOf(TaskList.eat) == -1)
+            {
+                AddTask(TaskList.eat);
+            }
         }
 
-        // Пример: создаем задачу отдыха, если персонаж устал
-        if (needs.IsTired())
-        {
-            Task restTask = new Task("Rest", TaskPriority.Medium);
-            AddTask(restTask);
-        }
 
-        // Другие логики создания задач...
 
+        CheckNeedMovingToTask();
         SortTasks();
     }
 
-    public void PerformCurrentTask(Character character)
+    public void CheckNeedMovingToTask()
     {
-        if (currentTask != null)
+        if (currentTask == TaskList.sleep)
         {
-            // Логика выполнения текущей задачи персонажа
-
-            // Пример: выполняем задачу поедания
-            if (currentTask.Name == "Eat")
+            if (!character.attributes.isInHome)
             {
-                character.CmdEat();
+                AddTask(TaskList.move, character.home.transform.position);
             }
-
-            // Пример: выполняем задачу отдыха
-            if (currentTask.Name == "Rest")
+            else if (!character.attributes.isInBed)
             {
-                character.CmdRest();
+                AddTask(TaskList.move, character.bed.transform.position);
             }
+            else
+            {
 
-            // Другие логики выполнения задач...
-
-            // Удаляем выполненную задачу
-            RemoveTask(currentTask);
+            }
+        }
+        else if (currentTask == TaskList.eat)
+        {
+            //AddTask(TaskList.move);
         }
     }
 }

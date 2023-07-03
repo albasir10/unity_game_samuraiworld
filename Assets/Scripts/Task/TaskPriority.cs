@@ -1,6 +1,9 @@
 public enum TaskPriority
 {
     Low = 1,
-    Medium = 2,
-    High = 3
+    LowMedium = 2,
+    Medium = 3,
+    MediumHigh = 4,
+    High = 5,
+    VeryHigh = 6
 }
